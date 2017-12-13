@@ -1,0 +1,26 @@
+---
+# Standards: 0.2
+galaxy_info:
+  author: bbaassssiiee
+  description: GIT - Source code version control.
+  company: bbaassssiiee
+
+  license: MIT
+
+  min_ansible_version: 1.9.0
+
+  platforms:
+    - name: EL
+      versions:
+        - 7
+    - name: Ubuntu
+      versions:
+        - trusty
+    - name: Debian
+      versions:
+        - jessie
+  galaxy_tags:
+    - system
+    - development
+
+dependencies: []

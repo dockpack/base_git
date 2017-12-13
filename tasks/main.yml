@@ -1,0 +1,20 @@
+---
+
+- name: Install Git from yum repo
+  become: yes
+  when: ansible_os_family == 'RedHat'
+  yum:
+    name: git
+    state: present
+    update_cache: yes
+  tags:
+    - git
+
+- name: Install Git from apt repo
+  become: yes
+  when: ansible_distribution == 'Debian' or ansible_distribution == 'Ubuntu'
+  apt:
+    name: git
+    state: present
+  tags:
+    - git
