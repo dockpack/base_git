@@ -1,6 +1,6 @@
-=========
+![Build Status](https://api.travis-ci.org/dockpack/base_git.svg)
 
-base_git is a role to install the Git version control client
+**base_git** is an ansible-role to install the Git version control client.
 
 Requirements
 ------------
