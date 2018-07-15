@@ -1,4 +1,4 @@
-pyyaml>3.12
+#pyyaml>3.12
 tox
 molecule
 docker
