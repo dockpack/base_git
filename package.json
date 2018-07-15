@@ -1,0 +1,10 @@
+{
+  "name": "dockpack.base_git",
+  "version": "0.3.0",
+  "scripts": {
+    "release": "release-it"
+  },
+  "devDependencies": {
+    "release-it": "^4.2.0"
+  }
+}
