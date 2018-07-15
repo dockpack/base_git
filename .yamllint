@@ -5,7 +5,7 @@ extends: default
 rules:
   braces:
     min-spaces-inside: 0
-    max-spaces-inside: 0
+    max-spaces-inside: 1
     min-spaces-inside-empty: -1
     max-spaces-inside-empty: -1
   brackets:
@@ -39,7 +39,7 @@ rules:
     check-multi-line-strings: false
   key-duplicates: enable
   line-length:
-    max: 250
+    max: 500
     allow-non-breakable-words: true
     allow-non-breakable-inline-mappings: false
   new-line-at-end-of-file: enable
