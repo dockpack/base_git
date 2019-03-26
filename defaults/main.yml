@@ -2,12 +2,10 @@
 collections_enabled: false
 
 # When collections is enabled this is the git you get
-base_git: rh-git218
+base_git: rh-git29
 
 base_git_rpms:
   - "{{ base_git }}"
-  - "{{ base_git }}-git-subtree"
-  - "{{ base_git }}-git-lfs"
   - "{{ base_git }}-git-svn"
   - "{{ base_git }}-perl-Git-SVN"
   - "{{ base_git }}-git-cvs"
