@@ -13,9 +13,6 @@ platforms:
   - name: base-git-ubuntu
     image: ubuntu
     privileged: True
-  - name: base-git-debian
-    image: maint/debian-systemd
-    privileged: True
 provisioner:
   name: ansible
   config_options:

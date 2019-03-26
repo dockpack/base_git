@@ -1,5 +1,7 @@
 ---
 # Standards: 0.2
 - hosts: all
+  vars:
+    collections_enabled: true
   roles:
     - role: base_git

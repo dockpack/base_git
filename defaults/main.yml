@@ -1,0 +1,18 @@
+# Software collections offer latest versions of programming languages
+collections_enabled: false
+
+# The file that needs the next line
+# scl enable rh-git218 bash
+collections_rc_file: /etc/skel/.bashrc
+
+# When collections is enabled this is the git you get
+base_git: rh-git218
+
+base_git_rpms:
+  - "{{ base_git }}"
+  - "{{ base_git }}-git-subtree"
+  - "{{ base_git }}-git-lfs"
+  - "{{ base_git }}-git-svn"
+  - "{{ base_git }}-perl-Git-SVN"
+  - "{{ base_git }}-git-cvs"
+  - "{{ base_git }}-git-p4"
