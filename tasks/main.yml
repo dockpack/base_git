@@ -7,12 +7,14 @@
   when: collections_enabled and ansible_distribution == 'CentOS'
   tags:
     - git
+    - base_git
 
 - name: enable rhel software collections
   command: "yum-config-manager --enable rhel-server-rhscl-{{ ansible_distribution_major_version }}-rpms"
   when: collections_enabled and ansible_distribution == 'Red Hat Enterprise Linux'
   tags:
     - git
+    - base_git
 
 - name: Install Git software collection
   become: yes
@@ -23,6 +25,7 @@
     update_cache: yes
   tags:
     - git
+    - base_git
 
 - name: Enable Git software collection
   file:
@@ -32,6 +35,7 @@
   when: collections_enabled and ansible_os_family == 'RedHat'
   tags:
     - git
+    - base_git
 
 - name: Install Git from yum repo
   become: yes
@@ -42,6 +46,7 @@
     update_cache: yes
   tags:
     - git
+    - base_git
 
 - name: Install Git from apt repo
   become: yes
@@ -51,3 +56,14 @@
     state: present
   tags:
     - git
+    - base_git
+
+- name: Disable Git software collection
+  file:
+    src: "/opt/rh/{{ base_git }}/enable"
+    path: /etc/profile.d/rh-git.sh
+    state: absent
+  when: not collections_enabled and ansible_os_family == 'RedHat'
+  tags:
+    - git
+    - base_git
