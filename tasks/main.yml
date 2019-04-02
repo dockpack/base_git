@@ -33,6 +33,14 @@
   tags:
     - git
 
+- name: Disable Git software collection
+  file:
+    path: /etc/profile.d/rh-git.sh
+    state: absent
+  when: not collections_enabled and ansible_os_family == 'RedHat'
+  tags:
+    - git
+
 - name: Install Git from yum repo
   become: yes
   when: not collections_enabled and ansible_os_family == 'RedHat'
