@@ -1,0 +1,7 @@
+# Molecule managed
+
+---
+command:
+  git:
+    exit-status: 1
+    stderr: []
