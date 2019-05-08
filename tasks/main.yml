@@ -4,6 +4,10 @@
   package:
     name: centos-release-scl-rh
     state: present
+  register: network_access
+  until: network_access is success
+  retries: 10
+  delay: 2
   when: collections_enabled and ansible_distribution == 'CentOS'
   tags:
     - git
@@ -23,6 +27,10 @@
     name: "{{ base_git_rpms }}"
     state: present
     update_cache: yes
+  register: network_access
+  until: network_access is success
+  retries: 10
+  delay: 2
   tags:
     - git
     - base_git
@@ -60,6 +68,10 @@
     name: git
     state: present
     update_cache: yes
+  register: network_access
+  until: network_access is success
+  retries: 10
+  delay: 2
   tags:
     - git
     - base_git
@@ -70,6 +82,10 @@
   apt:
     name: git
     state: present
+  register: network_access
+  until: network_access is success
+  retries: 10
+  delay: 2
   tags:
     - git
     - base_git
