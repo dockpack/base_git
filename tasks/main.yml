@@ -8,21 +8,21 @@
   until: network_access is success
   retries: 10
   delay: 2
-  when: collections_enabled and ansible_distribution == 'CentOS'
+  when: collections_enabled|bool and ansible_distribution == 'CentOS'
   tags:
     - git
     - base_git
 
 - name: enable rhel software collections
   command: "yum-config-manager --enable rhel-server-rhscl-{{ ansible_distribution_major_version }}-rpms"
-  when: collections_enabled and ansible_distribution == 'Red Hat Enterprise Linux'
+  when: collections_enabled|bool and ansible_distribution == 'Red Hat Enterprise Linux'
   tags:
     - git
     - base_git
 
 - name: Install Git software collection
   become: yes
-  when: collections_enabled and ansible_os_family == 'RedHat'
+  when: collections_enabled|bool and ansible_os_family == 'RedHat'
   yum:
     name: "{{ base_git_rpms }}"
     state: present
@@ -40,7 +40,7 @@
     src: "/opt/rh/{{ base_git }}/enable"
     path: /etc/profile.d/rh-git.sh
     state: link
-  when: collections_enabled and ansible_os_family == 'RedHat'
+  when: collections_enabled|bool and ansible_os_family == 'RedHat'
   tags:
     - git
     - base_git
@@ -49,7 +49,7 @@
   file:
     path: /etc/profile.d/rh-git.sh
     state: absent
-  when: not collections_enabled and ansible_os_family == 'RedHat'
+  when: not collections_enabled|bool and ansible_os_family == 'RedHat'
   tags:
     - git
 
@@ -57,13 +57,13 @@
   file:
     path: /etc/profile.d/rh-git.sh
     state: absent
-  when: not collections_enabled and ansible_os_family == 'RedHat'
+  when: not collections_enabled|bool and ansible_os_family == 'RedHat'
   tags:
     - git
 
 - name: Install Git from yum repo
   become: yes
-  when: not collections_enabled and ansible_os_family == 'RedHat'
+  when: not collections_enabled|bool and ansible_os_family == 'RedHat'
   yum:
     name: git
     state: present
@@ -95,7 +95,7 @@
     src: "/opt/rh/{{ base_git }}/enable"
     path: /etc/profile.d/rh-git.sh
     state: absent
-  when: not collections_enabled and ansible_os_family == 'RedHat'
+  when: not collections_enabled|bool and ansible_os_family == 'RedHat'
   tags:
     - git
     - base_git
