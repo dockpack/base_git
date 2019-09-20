@@ -3,10 +3,3 @@ collections_enabled: false
 
 # When collections is enabled this is set for the major versions in tasks/main.yml
 # base_git: rh-git218
-
-base_git_rpms:
-  - "{{ base_git }}"
-  - "{{ base_git }}-git-svn"
-  - "{{ base_git }}-perl-Git-SVN"
-  - "{{ base_git }}-git-cvs"
-  - "{{ base_git }}-git-p4"
