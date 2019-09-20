@@ -34,6 +34,16 @@
     - ansible_os_family == 'RedHat'
     - ansible_distribution_major_version|int == 7
 
+- name: Set git packages
+  when: collections_enabled|bool and ansible_os_family == 'RedHat'
+  set_fact:
+    base_git_rpms:
+      - "{{ base_git }}"
+      - "{{ base_git }}-git-svn"
+      - "{{ base_git }}-perl-Git-SVN"
+      - "{{ base_git }}-git-cvs"
+      - "{{ base_git }}-git-p4"
+
 - name: Install Git software collection
   become: yes
   when: collections_enabled|bool and ansible_os_family == 'RedHat'
