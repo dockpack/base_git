@@ -2,7 +2,7 @@
 collections_enabled: false
 
 # When collections is enabled this is the git you get
-base_git: rh-git29
+#base_git: rh-git29
 
 base_git_rpms:
   - "{{ base_git }}"
