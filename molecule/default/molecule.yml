@@ -18,6 +18,7 @@ provisioner:
   config_options:
     defaults:
       remote_tmp: /tmp
+      stdout_callback: yaml
   playbooks:
     converge: playbook.yml
   lint:
