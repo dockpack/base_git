@@ -1,5 +1,0 @@
----
-command:
-  type git:
-    exit-status: 0
-    stderr: []
