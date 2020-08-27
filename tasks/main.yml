@@ -26,6 +26,9 @@
   when:
     - ansible_os_family == 'RedHat'
     - ansible_distribution_major_version|int == 6
+  tags:
+    - git
+    - base_git
 
 - name: Set git
   set_fact:
@@ -33,6 +36,9 @@
   when:
     - ansible_os_family == 'RedHat'
     - ansible_distribution_major_version|int == 7
+  tags:
+    - git
+    - base_git
 
 - name: Set git packages
   when: collections_enabled|bool and ansible_os_family == 'RedHat'
@@ -43,6 +49,9 @@
       - "{{ base_git }}-perl-Git-SVN"
       - "{{ base_git }}-git-cvs"
       - "{{ base_git }}-git-p4"
+  tags:
+    - git
+    - base_git
 
 - name: Install Git software collection
   become: yes
