@@ -60,10 +60,11 @@
     name: "{{ base_git_rpms }}"
     state: present
     update_cache: yes
-  register: network_access
-  until: network_access is success
-  retries: 10
+  register: rhgit_install
+  until: rhgit_install is success
+  retries: 3
   delay: 2
+  ignore_errors: true
   tags:
     - git
     - base_git
@@ -73,7 +74,7 @@
     src: "/opt/rh/{{ base_git }}/enable"
     path: /etc/profile.d/rh-git.sh
     state: link
-  when: collections_enabled|bool and ansible_os_family == 'RedHat'
+  when: base_git is defined and rhgit_install is success
   tags:
     - git
     - base_git
@@ -95,8 +96,8 @@
     - git
 
 - name: Install Git from yum repo
-  become: yes
-  when: not collections_enabled|bool and ansible_os_family == 'RedHat'
+  become: ye
+  when: not collections_enabled|bool or rhgit_install is failed
   yum:
     name: git
     state: present
