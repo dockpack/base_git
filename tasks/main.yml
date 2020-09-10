@@ -54,12 +54,12 @@
     - base_git
 
 - name: Install Git software collection
-  become: yes
+  become: true
   when: collections_enabled|bool and ansible_os_family == 'RedHat'
   yum:
     name: "{{ base_git_rpms }}"
     state: present
-    update_cache: yes
+    update_cache: true
   register: rhgit_install
   until: rhgit_install is success
   retries: 3
@@ -96,12 +96,12 @@
     - git
 
 - name: Install Git from yum repo
-  become: ye
+  become: true
   when: not collections_enabled|bool or rhgit_install is failed
   yum:
     name: git
     state: present
-    update_cache: yes
+    update_cache: true
   register: network_access
   until: network_access is success
   retries: 10
@@ -111,7 +111,7 @@
     - base_git
 
 - name: Install Git from apt repo
-  become: yes
+  become: true
   when: ansible_distribution == 'Debian' or ansible_distribution == 'Ubuntu'
   apt:
     name: git
