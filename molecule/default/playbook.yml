@@ -2,4 +2,8 @@
 - hosts: all
   roles:
   - role: base_git
-    collections_enabled: true
+    vars:
+      collections_enabled: false
+  - role: base_git
+    vars:
+      collections_enabled: true
