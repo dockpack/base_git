@@ -69,15 +69,24 @@
     - git
     - base_git
 
+- name: Verify environment file
+  when: ansible_os_family == 'RedHat'
+  stat:
+    path: "/opt/rh/{{ base_git }}/enable"
+  register: rh_git_env
+
 - name: Enable Git software collection
   file:
     src: "/opt/rh/{{ base_git }}/enable"
     path: /etc/profile.d/rh-git.sh
     state: link
-  when: base_git is defined and rhgit_install is success
+  when:
+    - ansible_os_family == 'RedHat'
+    - rh_git_env.stat.exists
   tags:
     - git
     - base_git
+    - notest
 
 - name: Disable Git software collection
   file:
@@ -86,6 +95,7 @@
   when: not collections_enabled|bool and ansible_os_family == 'RedHat'
   tags:
     - git
+    - notest
 
 - name: Disable Git software collection
   file:
