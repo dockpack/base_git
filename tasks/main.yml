@@ -137,7 +137,6 @@
 
 - name: Disable Git software collection
   file:
-    src: "/opt/rh/{{ base_git }}/enable"
     path: /etc/profile.d/rh-git.sh
     state: absent
   when: not collections_enabled|bool and ansible_os_family == 'RedHat'
