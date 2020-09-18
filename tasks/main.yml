@@ -107,7 +107,8 @@
 
 - name: Install Git from yum repo
   become: true
-  when: not collections_enabled|bool or rhgit_install is failed
+  # yamllint disable-line rule:line-length
+  when: (ansible_os_family == 'RedHat') and (not collections_enabled|bool or rhgit_install is failed)
   yum:
     name: git
     state: present
