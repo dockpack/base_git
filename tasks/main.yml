@@ -80,6 +80,7 @@
     src: "/opt/rh/{{ base_git }}/enable"
     path: /etc/profile.d/rh-git.sh
     state: link
+    mode: 0777
   when:
     - ansible_os_family == 'RedHat'
     - rh_git_env.stat.exists
