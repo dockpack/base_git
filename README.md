@@ -1,4 +1,4 @@
-[![Galaxy](https://img.shields.io/badge/galaxy-dockpack.base__git-blue.svg?style=flat)](https://galaxy.ansible.com/dockpack/base_git)[![Build Status](https://api.travis-ci.org/dockpack/base_git.svg)](https://travis-ci.org/dockpack/base_git)
+[![Galaxy](https://img.shields.io/badge/galaxy-dockpack.base__git-blue.svg?style=flat)](https://galaxy.ansible.com/dockpack/base_git)[![Build Status](https://api.travis-ci.com/dockpack/base_git.svg)](https://travis-ci.com/dockpack/base_git)
 
 
 **base_git** is an ansible-role to install the Git version control client using Satellite, Yum or APT.
