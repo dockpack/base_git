@@ -7,9 +7,6 @@ driver:
 lint:
   name: yamllint
 platforms:
-  - name: base-git-centos6
-    image: centos:6
-    privileged: true
   - name: base-git-centos7
     image: milcom/centos7-systemd
     privileged: true
