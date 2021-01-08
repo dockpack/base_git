@@ -2,7 +2,7 @@
 
 
 **base_git** is an ansible-role to install the Git version control client using Satellite, Yum or APT.
-This role allows the use of git 2.9.3 on RHEL 6 instead of the legacy 1.7.1 by means of subscribimng to the Software Collections. This is great for on-premise solutions.
+This role allows the use of rh-git218 on RHEL 7 instead of the legacy 1.7.1 by means of subscribimng to the Software Collections. This is great for on-premise solutions.
 
 Requirements
 ------------
