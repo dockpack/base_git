@@ -1,5 +1,3 @@
+---
 # Software collections offer latest versions of programming languages
 collections_enabled: true
-
-# When collections is enabled this is set for the major versions in tasks/main.yml
-# base_git: rh-git218
