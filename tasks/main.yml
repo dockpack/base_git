@@ -8,7 +8,10 @@
   until: network_access is success
   retries: 10
   delay: 2
-  when: collections_enabled|bool and ansible_distribution == 'CentOS'
+  when:
+    - collections_enabled|bool
+    - ansible_distribution == 'CentOS'
+    - ansible_distribution_major_version|int <= 7
   tags:
     - git
     - base_git
@@ -16,17 +19,20 @@
 - name: enable rhel software collections
   # yamllint disable-line rule:line-length
   command: "yum-config-manager --enable rhel-server-rhscl-{{ ansible_distribution_major_version }}-rpms"
-  when: collections_enabled|bool and ansible_distribution == 'RedHat'
+  when:
+    - collections_enabled|bool
+    - ansible_distribution == 'RedHat'
+    - ansible_distribution_major_version|int <= 7
   tags:
     - git
     - base_git
 
 - name: Set git
   set_fact:
-    base_git: rh-git29
+    base_git: git
   when:
     - ansible_os_family == 'RedHat'
-    - ansible_distribution_major_version|int == 6
+    - ansible_distribution_major_version|int > 7
   tags:
     - git
     - base_git
@@ -37,6 +43,16 @@
   when:
     - ansible_os_family == 'RedHat'
     - ansible_distribution_major_version|int == 7
+  tags:
+    - git
+    - base_git
+
+- name: Set git
+  set_fact:
+    base_git: rh-git29
+  when:
+    - ansible_os_family == 'RedHat'
+    - ansible_distribution_major_version|int == 6
   tags:
     - git
     - base_git
@@ -56,7 +72,10 @@
 
 - name: Install Git software collection
   become: true
-  when: collections_enabled|bool and ansible_os_family == 'RedHat'
+  when:
+    - collections_enabled|bool
+    - ansible_os_family == 'RedHat'
+    - ansible_distribution_major_version|int <= 7
   yum:
     name: "{{ base_git_rpms }}"
     state: present
@@ -88,7 +107,7 @@
   tags:
     - git
     - base_git
-    - notest
+#    - notest
 
 - name: Disable Git software collection
   file:
@@ -107,26 +126,9 @@
   tags:
     - git
 
-- name: Install Git from yum repo
+- name: Install Git
   become: true
-  # yamllint disable-line rule:line-length
-  when: (ansible_os_family == 'RedHat') and (not collections_enabled|bool or rhgit_install is failed)
-  yum:
-    name: git
-    state: present
-    update_cache: true
-  register: network_access
-  until: network_access is success
-  retries: 10
-  delay: 2
-  tags:
-    - git
-    - base_git
-
-- name: Install Git from apt repo
-  become: true
-  when: ansible_distribution == 'Debian' or ansible_distribution == 'Ubuntu'
-  apt:
+  package:
     name: git
     state: present
     update_cache: true
