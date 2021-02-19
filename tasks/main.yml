@@ -107,7 +107,7 @@
   tags:
     - git
     - base_git
-#    - notest
+    - notest
 
 - name: Disable Git software collection
   file:
