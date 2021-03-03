@@ -3,7 +3,7 @@
   roles:
   - role: base_git
     vars:
-      collections_enabled: false
+      collections_enabled: true
   - role: base_git
     vars:
       collections_enabled: true
