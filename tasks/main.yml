@@ -1,12 +1,13 @@
 ---
 
 - name: install centos software collections
-  package:
+  yum:
     name: centos-release-scl-rh
     state: present
+    update_cache: true
   register: network_access
   until: network_access is success
-  retries: 10
+  retries: 3
   delay: 2
   when:
     - collections_enabled|bool
@@ -30,12 +31,10 @@
 - name: Set git
   set_fact:
     base_git: git
-  when:
-    - ansible_os_family == 'RedHat'
-    - ansible_distribution_major_version|int > 7
   tags:
     - git
     - base_git
+    - test
 
 - name: Set git
   set_fact:
@@ -43,9 +42,11 @@
   when:
     - ansible_os_family == 'RedHat'
     - ansible_distribution_major_version|int == 7
+    - collections_enabled|bool
   tags:
     - git
     - base_git
+    - test
 
 - name: Set git
   set_fact:
@@ -53,9 +54,11 @@
   when:
     - ansible_os_family == 'RedHat'
     - ansible_distribution_major_version|int == 6
+    - collections_enabled|bool
   tags:
     - git
     - base_git
+    - test
 
 - name: Set git packages
   when: collections_enabled|bool and ansible_os_family == 'RedHat'
@@ -94,6 +97,8 @@
   stat:
     path: "/opt/rh/{{ base_git }}/enable"
   register: rh_git_env
+  tags:
+    - test
 
 - name: Enable Git software collection
   file:
@@ -107,24 +112,16 @@
   tags:
     - git
     - base_git
-    - notest
+    - test
 
 - name: Disable Git software collection
   file:
     path: /etc/profile.d/rh-git.sh
     state: absent
-  when: not collections_enabled|bool and ansible_os_family == 'RedHat'
+  when: collections_enabled|bool and ansible_os_family == 'RedHat'
   tags:
     - git
     - notest
-
-- name: Disable Git software collection
-  file:
-    path: /etc/profile.d/rh-git.sh
-    state: absent
-  when: not collections_enabled|bool and ansible_os_family == 'RedHat'
-  tags:
-    - git
 
 - name: Install Git
   become: true
@@ -139,6 +136,19 @@
   tags:
     - git
     - base_git
+
+- name: Collect git version
+  command: bash --login -c 'git --version'
+  register: git_version
+  changed_when: false
+  tags:
+    - test
+
+- name: Display git version
+  debug:
+    msg: "{{ base_git }} {{ git_version.stdout }}"
+  tags:
+    - test
 
 - name: Disable Git software collection
   file:
