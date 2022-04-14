@@ -1,6 +1,8 @@
 ---
 # Standards: 0.2
 galaxy_info:
+  role_name: base_git
+  namespace: dockpack
   author: bbaassssiiee
   description: GIT - Source code version control.
   company: bbaassssiiee
@@ -14,6 +16,7 @@ galaxy_info:
       versions:
         - 6
         - 7
+        - 8
     - name: Ubuntu
       versions:
         - trusty
