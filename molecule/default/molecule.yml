@@ -13,7 +13,7 @@ platforms:
     image: quay.io/centos/centos:stream8
     privileged: true
   - name: base-git-centos7
-    image: milcom/centos7-systemd
+    image: centos:7
     privileged: true
   - name: base-git-ubuntu
     image: ubuntu
